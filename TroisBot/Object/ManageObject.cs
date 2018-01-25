@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Magic;
 using static TroisBot.Memory.Offset;
+using TroisBot.Mouvement;
 
 namespace TroisBot.Object
 {
@@ -16,6 +17,11 @@ namespace TroisBot.Object
         uint FirstObject = 0;
 
         BlackMagic WowReader = new BlackMagic();
+
+        //test CTM
+        CTM mouve = new CTM();
+        Random rand = new Random();
+        
 
         Objects LocalPlayer = new Objects();
         Objects LocalTarget = new Objects();
@@ -150,6 +156,12 @@ namespace TroisBot.Object
         public void affichetest()
         {
             Console.WriteLine("Nombre de mob visible: " + CurrentPlayers.Count);
+            Objects test = (Objects)CurrentPlayers[rand.Next(CurrentPlayers.Count)];
+
+            if(LocalTarget.Guid != 0)
+                mouve.ClickToMove(test.YPos, test.XPos, WowReader);
+
+            //WowReader.WriteUInt64((uint)ClientOffsets.LocalTargetGUID, (uint)test.Guid);
         }
 
         private string MobNameFromGuid(ulong Guid)

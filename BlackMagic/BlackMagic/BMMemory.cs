@@ -62,13 +62,13 @@ namespace Magic
 			return SMemory.WriteUShort(this.m_hProcess, dwAddress, Value);
 		}
 
-		/// <summary>
-		/// Writes a value to another process' memory.
-		/// </summary>
-		/// <param name="dwAddress">Address at which value will be written.</param>
-		/// <param name="Value">Value that will be written to memory.</param>
-		/// <returns>Returns true on success, false on failure.</returns>
-		public bool WriteShort(uint dwAddress, short Value)
+        /// <summary>
+        /// Writes a value to another process' memory.
+        /// </summary>
+        /// <param name="dwAddress">Address at which value will be written.</param>
+        /// <param name="Value">Value that will be written to memory.</param>
+        /// <returns>Returns true on success, false on failure.</returns>
+        public bool WriteShort(uint dwAddress, short Value)
 		{
 			return SMemory.WriteShort(this.m_hProcess, dwAddress, Value);
 		}

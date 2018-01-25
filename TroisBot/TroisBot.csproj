@@ -44,6 +44,7 @@
   <ItemGroup>
     <Compile Include="Keysim\Keysim.cs" />
     <Compile Include="Memory\Offset.cs" />
+    <Compile Include="Mouvement\CTM.cs" />
     <Compile Include="Object\ManageObject.cs" />
     <Compile Include="Object\Objects.cs" />
     <Compile Include="Program.cs" />
