@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27130.2024
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TroisBot", "TroisBot\TroisBot.csproj", "{A991E431-1B27-4300-BED6-1F66B8B4868F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TroisBot", "TroisBot\TroisBot.csproj", "{A385E80F-B05A-4FEA-A631-5660BAD71181}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlackMagic", "BlackMagic\BlackMagic\BlackMagic.csproj", "{79FD54B0-DEAB-459F-83B9-F1CED68D288B}"
 EndProject
@@ -19,18 +19,18 @@ Global
 		Release|Win32 = Release|Win32
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{A991E431-1B27-4300-BED6-1F66B8B4868F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A991E431-1B27-4300-BED6-1F66B8B4868F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A991E431-1B27-4300-BED6-1F66B8B4868F}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{A991E431-1B27-4300-BED6-1F66B8B4868F}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{A991E431-1B27-4300-BED6-1F66B8B4868F}.Debug|Win32.ActiveCfg = Debug|Any CPU
-		{A991E431-1B27-4300-BED6-1F66B8B4868F}.Debug|Win32.Build.0 = Debug|Any CPU
-		{A991E431-1B27-4300-BED6-1F66B8B4868F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A991E431-1B27-4300-BED6-1F66B8B4868F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A991E431-1B27-4300-BED6-1F66B8B4868F}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{A991E431-1B27-4300-BED6-1F66B8B4868F}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{A991E431-1B27-4300-BED6-1F66B8B4868F}.Release|Win32.ActiveCfg = Release|Any CPU
-		{A991E431-1B27-4300-BED6-1F66B8B4868F}.Release|Win32.Build.0 = Release|Any CPU
+		{A385E80F-B05A-4FEA-A631-5660BAD71181}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A385E80F-B05A-4FEA-A631-5660BAD71181}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A385E80F-B05A-4FEA-A631-5660BAD71181}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{A385E80F-B05A-4FEA-A631-5660BAD71181}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{A385E80F-B05A-4FEA-A631-5660BAD71181}.Debug|Win32.ActiveCfg = Debug|Any CPU
+		{A385E80F-B05A-4FEA-A631-5660BAD71181}.Debug|Win32.Build.0 = Debug|Any CPU
+		{A385E80F-B05A-4FEA-A631-5660BAD71181}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A385E80F-B05A-4FEA-A631-5660BAD71181}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A385E80F-B05A-4FEA-A631-5660BAD71181}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{A385E80F-B05A-4FEA-A631-5660BAD71181}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{A385E80F-B05A-4FEA-A631-5660BAD71181}.Release|Win32.ActiveCfg = Release|Any CPU
+		{A385E80F-B05A-4FEA-A631-5660BAD71181}.Release|Win32.Build.0 = Release|Any CPU
 		{79FD54B0-DEAB-459F-83B9-F1CED68D288B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{79FD54B0-DEAB-459F-83B9-F1CED68D288B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{79FD54B0-DEAB-459F-83B9-F1CED68D288B}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU

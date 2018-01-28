@@ -1,0 +1,18 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="TroisBot.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="dbc" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">D:\Games\Wrath of the Lich King\dbc</Value>
+    </Setting>
+    <Setting Name="maps" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">D:\Games\Wrath of the Lich King\maps</Value>
+    </Setting>
+    <Setting Name="vmaps" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">D:\Games\Wrath of the Lich King\vmaps</Value>
+    </Setting>
+    <Setting Name="mmaps" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">D:\Games\Wrath of the Lich King\mmaps</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
