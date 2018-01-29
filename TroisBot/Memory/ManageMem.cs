@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TroisBot.Radar;
 using TroisBot.Units;
+using TroisBot.Move;
 using static TroisBot.Memory.Offset;
 
 namespace TroisBot.Memory
@@ -30,16 +31,34 @@ namespace TroisBot.Memory
 
         //zonetest
         ManageGraph graph = new ManageGraph();
-
         public Bitmap test(Bitmap test)
         {
             Bitmap coco = new Bitmap(260, 260);
             foreach (Player i in CurrentPlayers)
             {
-                coco = graph.TracePlayerInMap(test, LocalPlayer, i);
+                if (i.Type == 3)
+                {
+                    coco = graph.TracePlayerInMap(test, LocalPlayer, i, Color.Red);
+                }
+                else if (i.Type == 4)
+                {
+                    if (i.Name == LocalPlayer.Name)
+                        coco = graph.TracePlayerInMap(test, LocalPlayer, i, Color.Blue);
+                    else
+                        coco = graph.TracePlayerInMap(test, LocalPlayer, i, Color.Green);
+                }
+                //coco = graph.TracePlayerInMap(test, LocalPlayer, i);
             }
-            coco = graph.TracePlayerInMap(test, LocalPlayer, LocalTarget);
+            if(LocalTarget.Guid != 0)
+                coco = graph.TracePlayerInMap(test, LocalPlayer, LocalTarget, Color.Yellow, true);
+
             return coco;
+        }
+
+        public void testmoveAsync()
+        {
+            CTM move = new CTM(LocalPlayer, LocalTarget, WowReader);
+            move.StartThread();
         }
         //finzonetest
 
@@ -91,7 +110,9 @@ namespace TroisBot.Memory
             LocalPlayer.MaxHealth = WowReader.ReadUInt((uint)(LocalPlayer.UnitFieldsAddress + UnitOffsets.MaxHealth));
             LocalPlayer.Level = WowReader.ReadUInt((uint)(LocalPlayer.UnitFieldsAddress + UnitOffsets.Level));
             LocalPlayer.MaxEnergy = WowReader.ReadUInt((uint)(LocalPlayer.UnitFieldsAddress + UnitOffsets.MaxEnergy));
+            LocalPlayer.MapId = WowReader.ReadUInt((uint)ObjectOffsets.mapId);
             LocalPlayer.Name = PlayerNameFromGuid(LocalPlayer.Guid);
+            LocalPlayer.majPosition();
             if (LocalPlayer.CurrentHealth <= 0) { LocalPlayer.isDead = true; }
 
             LocalTarget.Guid = WowReader.ReadUInt64((uint)(ClientOffsets.LocalTargetGUID));
@@ -111,6 +132,7 @@ namespace TroisBot.Memory
                 LocalTarget.Level = WowReader.ReadUInt((uint)(LocalTarget.UnitFieldsAddress + UnitOffsets.Level));
                 LocalTarget.SummonedBy = WowReader.ReadUInt64((uint)(LocalTarget.UnitFieldsAddress + UnitOffsets.SummonedBy));
                 LocalTarget.MaxEnergy = WowReader.ReadUInt((uint)(LocalTarget.UnitFieldsAddress + UnitOffsets.MaxEnergy));
+                LocalTarget.majPosition();
 
                 if (LocalTarget.Type == 3) // not a human player
                     LocalTarget.Name = MobNameFromGuid(LocalTarget.Guid);
@@ -238,6 +260,18 @@ namespace TroisBot.Memory
         public string GetNamePlayer()
         {
             return LocalPlayer.Name;
+        }
+        public uint GetLevelPlayer()
+        {
+            return LocalPlayer.Level;
+        }
+        public string GetLifePlayer()
+        {
+            return LocalPlayer.CurrentHealth.ToString() + "/" + LocalPlayer.MaxHealth.ToString();
+        }
+        public string GetEnergyPlayer()
+        {
+            return LocalPlayer.CurrentEnergy.ToString() + "/" + LocalPlayer.MaxEnergy.ToString();
         }
     }
 }

@@ -51,6 +51,9 @@ namespace TroisBot
             mem.ScanObject();
 
             label_name.Text = mem.GetNamePlayer();
+            label_level.Text = mem.GetLevelPlayer().ToString();
+            label_vie.Text = mem.GetLifePlayer();
+            label_energie.Text = mem.GetEnergyPlayer();
 
             pictureBox_maps.Image = mem.test(DrawArea);
         }
@@ -60,6 +63,11 @@ namespace TroisBot
             Graphics G = Graphics.FromImage(img);
             G.Clear(Color.White);
             G.Dispose();
+        }
+
+        private void button_move_Click(object sender, EventArgs e)
+        {
+            mem.testmoveAsync();
         }
     }
 }
