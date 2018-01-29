@@ -12,6 +12,7 @@ using DetourCLI;
 using MapCLI;
 using TroisBot.Memory;
 using TroisBot.Properties;
+using TroisBot.Units;
 using VMapCLI;
 
 namespace TroisBot
@@ -35,8 +36,7 @@ namespace TroisBot
             DrawArea = new Bitmap(260, 260);
             pictureBox_maps.Image = DrawArea;
 
-            timer_ScanInfo.Interval = 100;
-            
+            timer_ScanInfo.Interval = 100; 
         }
 
         private void button_start_Click(object sender, EventArgs e)
@@ -68,6 +68,21 @@ namespace TroisBot
         private void button_move_Click(object sender, EventArgs e)
         {
             mem.testmoveAsync();
+        }
+
+        private void MajPlayerInfo(Player player)
+        {
+            label_name.Text = player.Name;
+            label_level.Text = player.Level.ToString();
+            label_vie.Text = player.CurrentHealth.ToString() + "/" + player.MaxHealth.ToString();
+            label_energie.Text = player.CurrentEnergy.ToString() + "/" + player.MaxEnergy.ToString();
+        }
+
+        private void MajTargetInfo(Player target)
+        {
+            label_target_name.Text = target.Name;
+            label_target_level.Text = target.Level.ToString();
+            label_target_vie.Text = target.CurrentHealth.ToString() + "/" + target.MaxHealth.ToString();
         }
     }
 }

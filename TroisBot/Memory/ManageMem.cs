@@ -257,6 +257,21 @@ namespace TroisBot.Memory
             return WowReader.ReadUInt64((uint)(Base + ObjectOffsets.Guid));
         }
 
+        public Player GetPlayer()
+        {
+            return LocalPlayer;
+        }
+
+        public Player GetTarget()
+        {
+            return LocalTarget;
+        }
+
+        public ArrayList GetListObject()
+        {
+            return CurrentPlayers;
+        }
+
         public string GetNamePlayer()
         {
             return LocalPlayer.Name;

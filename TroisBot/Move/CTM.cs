@@ -9,6 +9,8 @@ using static TroisBot.Memory.Offset;
 using DetourCLI;
 using System.Threading;
 using TroisBot.Units.Definition;
+using TroisBot.Simu;
+using System.Windows.Forms;
 
 namespace TroisBot.Move
 {
@@ -39,39 +41,53 @@ namespace TroisBot.Move
 
         public void GenerathPathAsync()
         {
-            float x, xsav;
-            float y;
-            float z;
+            float x, xt;
+            float y, yt;
+            float z, zt;
             //float dist;
 
             Position dest = new Position();
 
             using (var detour = new Detour())
             {
+                bool oneMove = true;
                 List<MapCLI.Point> resultPath;
                 var result = detour.FindPath(player.YPos, player.XPos, player.ZPos,
                                         target.YPos, target.XPos, target.ZPos,
                                         (int)player.MapId, out resultPath);
-                for(int i = 0; i < resultPath.Count; i++)
+                //ClickToMove(resultPath[0].X, resultPath[0].Y, resultPath[0].Z);
+                for (int i = 0; i < resultPath.Count; i++)
                 {
+                    if (oneMove)
+                        ClickToMove(resultPath[i].X, resultPath[i].Y, resultPath[i].Z);
+                    else
+                        oneMove = false;
+
                     x = write.ReadFloat((uint)(player.BaseAddress + ObjectOffsets.Pos_X));
                     y = write.ReadFloat((uint)(player.BaseAddress + ObjectOffsets.Pos_Y));
                     z = write.ReadFloat((uint)(player.BaseAddress + ObjectOffsets.Pos_Z));
-                    player.position.SetPosition(x, y, z);
-                    dest.SetPosition(resultPath[i].X, resultPath[i].Y, resultPath[i].Z);
+                    /*xt = write.ReadFloat((uint)(target.BaseAddress + ObjectOffsets.Pos_X));
+                    yt = write.ReadFloat((uint)(target.BaseAddress + ObjectOffsets.Pos_Y));
+                    zt = write.ReadFloat((uint)(target.BaseAddress + ObjectOffsets.Pos_Z));*/
+                    player.position.SetPosition(y, x, z);
+                    dest.SetPosition(target.YPos, target.XPos, target.ZPos);
 
-                    //var dist = dest - player.position;
+                    var dist = dest - player.position;
 
-                    if (dest == player.position)
-                        ClickToMove(resultPath[i].X, resultPath[i].Y, resultPath[i].Z);
-                    else if (x == resultPath[i].X)
+                    if (dist.Length < 6f)
+                    {
+                        new KeySim().KeyDown((int)Keys.Down);
+                        new KeySim().KeyUp((int)Keys.Down);
+                        break;
+                    }
+                    else if (y > resultPath[i].X - 0.5F && y < resultPath[i].X + 0.5F && x > resultPath[i].Y - 0.5f && x < resultPath[i].Y + 0.5f)
                     {
                         ClickToMove(resultPath[i].X, resultPath[i].Y, resultPath[i].Z);
                     }
                     else
                         i--;
 
-                    Thread.Sleep(100);
+                    //Thread.Sleep(100);
                 }
             }
         }

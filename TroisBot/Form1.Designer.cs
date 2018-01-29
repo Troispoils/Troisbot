@@ -43,7 +43,14 @@
             this.button_start = new System.Windows.Forms.Button();
             this.timer_ScanInfo = new System.Windows.Forms.Timer(this.components);
             this.button_move = new System.Windows.Forms.Button();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label_target_name = new System.Windows.Forms.Label();
+            this.label_target_level = new System.Windows.Forms.Label();
+            this.label_target_vie = new System.Windows.Forms.Label();
             this.groupBox_info_Player.SuspendLayout();
+            this.groupBox_info_Target.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_maps)).BeginInit();
             this.SuspendLayout();
             // 
@@ -138,6 +145,12 @@
             // 
             // groupBox_info_Target
             // 
+            this.groupBox_info_Target.Controls.Add(this.label_target_vie);
+            this.groupBox_info_Target.Controls.Add(this.label_target_level);
+            this.groupBox_info_Target.Controls.Add(this.label_target_name);
+            this.groupBox_info_Target.Controls.Add(this.label7);
+            this.groupBox_info_Target.Controls.Add(this.label6);
+            this.groupBox_info_Target.Controls.Add(this.label5);
             this.groupBox_info_Target.Location = new System.Drawing.Point(13, 119);
             this.groupBox_info_Target.Name = "groupBox_info_Target";
             this.groupBox_info_Target.Size = new System.Drawing.Size(259, 100);
@@ -178,6 +191,60 @@
             this.button_move.UseVisualStyleBackColor = true;
             this.button_move.Click += new System.EventHandler(this.button_move_Click);
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(7, 20);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(41, 13);
+            this.label5.TabIndex = 0;
+            this.label5.Text = "Name :";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(7, 37);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(39, 13);
+            this.label6.TabIndex = 1;
+            this.label6.Text = "Level :";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(7, 54);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(28, 13);
+            this.label7.TabIndex = 2;
+            this.label7.Text = "Vie :";
+            // 
+            // label_target_name
+            // 
+            this.label_target_name.AutoSize = true;
+            this.label_target_name.Location = new System.Drawing.Point(79, 19);
+            this.label_target_name.Name = "label_target_name";
+            this.label_target_name.Size = new System.Drawing.Size(35, 13);
+            this.label_target_name.TabIndex = 3;
+            this.label_target_name.Text = "label8";
+            // 
+            // label_target_level
+            // 
+            this.label_target_level.AutoSize = true;
+            this.label_target_level.Location = new System.Drawing.Point(79, 36);
+            this.label_target_level.Name = "label_target_level";
+            this.label_target_level.Size = new System.Drawing.Size(35, 13);
+            this.label_target_level.TabIndex = 4;
+            this.label_target_level.Text = "label9";
+            // 
+            // label_target_vie
+            // 
+            this.label_target_vie.AutoSize = true;
+            this.label_target_vie.Location = new System.Drawing.Point(79, 53);
+            this.label_target_vie.Name = "label_target_vie";
+            this.label_target_vie.Size = new System.Drawing.Size(41, 13);
+            this.label_target_vie.TabIndex = 5;
+            this.label_target_vie.Text = "label10";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -192,6 +259,8 @@
             this.Text = "TroisBot";
             this.groupBox_info_Player.ResumeLayout(false);
             this.groupBox_info_Player.PerformLayout();
+            this.groupBox_info_Target.ResumeLayout(false);
+            this.groupBox_info_Target.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_maps)).EndInit();
             this.ResumeLayout(false);
 
@@ -213,6 +282,12 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Timer timer_ScanInfo;
         private System.Windows.Forms.Button button_move;
+        private System.Windows.Forms.Label label_target_vie;
+        private System.Windows.Forms.Label label_target_level;
+        private System.Windows.Forms.Label label_target_name;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label5;
     }
 }
 
