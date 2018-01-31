@@ -52,8 +52,8 @@ namespace TroisBot.Move
             {
                 bool oneMove = true;
                 List<MapCLI.Point> resultPath;
-                var result = detour.FindPath(player.YPos, player.XPos, player.ZPos,
-                                        target.YPos, target.XPos, target.ZPos,
+                var result = detour.FindPath(player.XPos, player.YPos, player.ZPos,
+                                        target.XPos, target.YPos, target.ZPos,
                                         (int)player.MapId, out resultPath);
                 //ClickToMove(resultPath[0].X, resultPath[0].Y, resultPath[0].Z);
                 for (int i = 0; i < resultPath.Count; i++)
@@ -69,10 +69,10 @@ namespace TroisBot.Move
                     /*xt = write.ReadFloat((uint)(target.BaseAddress + ObjectOffsets.Pos_X));
                     yt = write.ReadFloat((uint)(target.BaseAddress + ObjectOffsets.Pos_Y));
                     zt = write.ReadFloat((uint)(target.BaseAddress + ObjectOffsets.Pos_Z));*/
-                    player.position.SetPosition(y, x, z);
-                    dest.SetPosition(target.YPos, target.XPos, target.ZPos);
+                    player.SetPosition(x, y, z);
+                    dest.SetPosition(target.XPos, target.YPos, target.ZPos);
 
-                    var dist = dest - player.position;
+                    var dist = dest - player;
 
                     if (dist.Length < 6f)
                     {

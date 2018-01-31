@@ -8,7 +8,7 @@ using TroisBot.Units.Definition;
 
 namespace TroisBot.Units
 {
-    class Player : ICloneable
+    class Player : Position
     {
         // general properties
         public ulong Guid = 0;
@@ -23,7 +23,7 @@ namespace TroisBot.Units
         public short Type = 0;
         public String Name = "";
 
-        public Position position = new Position();
+       // public Position position = new Position();
 
 
         // more specialised properties (player or mob)
@@ -40,11 +40,6 @@ namespace TroisBot.Units
         public Player()
         {
 
-        }
-
-        public void majPosition()
-        {
-            position.SetPosition(XPos, YPos, ZPos);
         }
 
         public Player(ulong cGuid, ulong cSummonedBy, float cXPos, float cYPos, float cZPos, float cRotation, uint cBaseAddress, uint cUnitFieldsAddress, short cType, String cName, uint cCurrentHealth, uint cMaxHealth, uint cCurrentEnergy, uint cMaxEnergy, uint cLevel, bool cisDead, uint cMapId)

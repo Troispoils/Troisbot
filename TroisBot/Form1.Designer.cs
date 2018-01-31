@@ -39,19 +39,22 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox_info_Target = new System.Windows.Forms.GroupBox();
+            this.label_target_vie = new System.Windows.Forms.Label();
+            this.label_target_level = new System.Windows.Forms.Label();
+            this.label_target_name = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
             this.pictureBox_maps = new System.Windows.Forms.PictureBox();
             this.button_start = new System.Windows.Forms.Button();
             this.timer_ScanInfo = new System.Windows.Forms.Timer(this.components);
             this.button_move = new System.Windows.Forms.Button();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label_target_name = new System.Windows.Forms.Label();
-            this.label_target_level = new System.Windows.Forms.Label();
-            this.label_target_vie = new System.Windows.Forms.Label();
+            this.statusStrip_info = new System.Windows.Forms.StatusStrip();
+            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.groupBox_info_Player.SuspendLayout();
             this.groupBox_info_Target.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_maps)).BeginInit();
+            this.statusStrip_info.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox_info_Player
@@ -153,15 +156,69 @@
             this.groupBox_info_Target.Controls.Add(this.label5);
             this.groupBox_info_Target.Location = new System.Drawing.Point(13, 119);
             this.groupBox_info_Target.Name = "groupBox_info_Target";
-            this.groupBox_info_Target.Size = new System.Drawing.Size(259, 100);
+            this.groupBox_info_Target.Size = new System.Drawing.Size(259, 73);
             this.groupBox_info_Target.TabIndex = 1;
             this.groupBox_info_Target.TabStop = false;
             this.groupBox_info_Target.Text = "Target Info";
             // 
+            // label_target_vie
+            // 
+            this.label_target_vie.AutoSize = true;
+            this.label_target_vie.Location = new System.Drawing.Point(79, 53);
+            this.label_target_vie.Name = "label_target_vie";
+            this.label_target_vie.Size = new System.Drawing.Size(41, 13);
+            this.label_target_vie.TabIndex = 5;
+            this.label_target_vie.Text = "label10";
+            // 
+            // label_target_level
+            // 
+            this.label_target_level.AutoSize = true;
+            this.label_target_level.Location = new System.Drawing.Point(79, 36);
+            this.label_target_level.Name = "label_target_level";
+            this.label_target_level.Size = new System.Drawing.Size(35, 13);
+            this.label_target_level.TabIndex = 4;
+            this.label_target_level.Text = "label9";
+            // 
+            // label_target_name
+            // 
+            this.label_target_name.AutoSize = true;
+            this.label_target_name.Location = new System.Drawing.Point(79, 19);
+            this.label_target_name.Name = "label_target_name";
+            this.label_target_name.Size = new System.Drawing.Size(35, 13);
+            this.label_target_name.TabIndex = 3;
+            this.label_target_name.Text = "label8";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(7, 54);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(28, 13);
+            this.label7.TabIndex = 2;
+            this.label7.Text = "Vie :";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(7, 37);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(39, 13);
+            this.label6.TabIndex = 1;
+            this.label6.Text = "Level :";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(7, 20);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(41, 13);
+            this.label5.TabIndex = 0;
+            this.label5.Text = "Name :";
+            // 
             // pictureBox_maps
             // 
             this.pictureBox_maps.BackColor = System.Drawing.Color.White;
-            this.pictureBox_maps.Location = new System.Drawing.Point(12, 254);
+            this.pictureBox_maps.Location = new System.Drawing.Point(12, 227);
             this.pictureBox_maps.Name = "pictureBox_maps";
             this.pictureBox_maps.Size = new System.Drawing.Size(260, 260);
             this.pictureBox_maps.TabIndex = 2;
@@ -169,7 +226,7 @@
             // 
             // button_start
             // 
-            this.button_start.Location = new System.Drawing.Point(197, 225);
+            this.button_start.Location = new System.Drawing.Point(197, 198);
             this.button_start.Name = "button_start";
             this.button_start.Size = new System.Drawing.Size(75, 23);
             this.button_start.TabIndex = 3;
@@ -183,7 +240,7 @@
             // 
             // button_move
             // 
-            this.button_move.Location = new System.Drawing.Point(116, 224);
+            this.button_move.Location = new System.Drawing.Point(115, 198);
             this.button_move.Name = "button_move";
             this.button_move.Size = new System.Drawing.Size(75, 23);
             this.button_move.TabIndex = 4;
@@ -191,70 +248,37 @@
             this.button_move.UseVisualStyleBackColor = true;
             this.button_move.Click += new System.EventHandler(this.button_move_Click);
             // 
-            // label5
+            // statusStrip_info
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(7, 20);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(41, 13);
-            this.label5.TabIndex = 0;
-            this.label5.Text = "Name :";
+            this.statusStrip_info.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabel1});
+            this.statusStrip_info.Location = new System.Drawing.Point(0, 505);
+            this.statusStrip_info.Name = "statusStrip_info";
+            this.statusStrip_info.Size = new System.Drawing.Size(284, 22);
+            this.statusStrip_info.SizingGrip = false;
+            this.statusStrip_info.Stretch = false;
+            this.statusStrip_info.TabIndex = 5;
+            this.statusStrip_info.Text = "statusStrip1";
             // 
-            // label6
+            // toolStripStatusLabel1
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(7, 37);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(39, 13);
-            this.label6.TabIndex = 1;
-            this.label6.Text = "Level :";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(7, 54);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(28, 13);
-            this.label7.TabIndex = 2;
-            this.label7.Text = "Vie :";
-            // 
-            // label_target_name
-            // 
-            this.label_target_name.AutoSize = true;
-            this.label_target_name.Location = new System.Drawing.Point(79, 19);
-            this.label_target_name.Name = "label_target_name";
-            this.label_target_name.Size = new System.Drawing.Size(35, 13);
-            this.label_target_name.TabIndex = 3;
-            this.label_target_name.Text = "label8";
-            // 
-            // label_target_level
-            // 
-            this.label_target_level.AutoSize = true;
-            this.label_target_level.Location = new System.Drawing.Point(79, 36);
-            this.label_target_level.Name = "label_target_level";
-            this.label_target_level.Size = new System.Drawing.Size(35, 13);
-            this.label_target_level.TabIndex = 4;
-            this.label_target_level.Text = "label9";
-            // 
-            // label_target_vie
-            // 
-            this.label_target_vie.AutoSize = true;
-            this.label_target_vie.Location = new System.Drawing.Point(79, 53);
-            this.label_target_vie.Name = "label_target_vie";
-            this.label_target_vie.Size = new System.Drawing.Size(41, 13);
-            this.label_target_vie.TabIndex = 5;
-            this.label_target_vie.Text = "label10";
+            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(118, 17);
+            this.toolStripStatusLabel1.Text = "toolStripStatusLabel1";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 527);
+            this.Controls.Add(this.statusStrip_info);
             this.Controls.Add(this.button_move);
             this.Controls.Add(this.button_start);
             this.Controls.Add(this.pictureBox_maps);
             this.Controls.Add(this.groupBox_info_Target);
             this.Controls.Add(this.groupBox_info_Player);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "Form1";
             this.Text = "TroisBot";
             this.groupBox_info_Player.ResumeLayout(false);
@@ -262,7 +286,10 @@
             this.groupBox_info_Target.ResumeLayout(false);
             this.groupBox_info_Target.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_maps)).EndInit();
+            this.statusStrip_info.ResumeLayout(false);
+            this.statusStrip_info.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -288,6 +315,8 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.StatusStrip statusStrip_info;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
     }
 }
 

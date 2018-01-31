@@ -30,7 +30,7 @@ namespace TroisBot.Memory
         ArrayList CurrentPlayers = new ArrayList();
 
         //zonetest
-        ManageGraph graph = new ManageGraph();
+        /*ManageGraph graph = new ManageGraph();
         public Bitmap test(Bitmap test)
         {
             Bitmap coco = new Bitmap(260, 260);
@@ -53,7 +53,7 @@ namespace TroisBot.Memory
                 coco = graph.TracePlayerInMap(test, LocalPlayer, LocalTarget, Color.Yellow, true);
 
             return coco;
-        }
+        }*/
 
         public void testmoveAsync()
         {
@@ -93,7 +93,137 @@ namespace TroisBot.Memory
                 return true;
         }
 
-        public void ScanObject()
+        public Player ScanPlayer()
+        {
+            Player player = new Player();
+
+            player.Guid = LocalPlayer.Guid;
+            player.BaseAddress = GetObjectBaseByGuid(LocalPlayer.Guid);
+            /*player.XPos = WowReader.ReadFloat((uint)(LocalPlayer.BaseAddress + ObjectOffsets.Pos_X));
+            player.YPos = WowReader.ReadFloat((uint)(LocalPlayer.BaseAddress + ObjectOffsets.Pos_Y));
+            player.ZPos = WowReader.ReadFloat((uint)(LocalPlayer.BaseAddress + ObjectOffsets.Pos_Z));*/
+            player.Rotation = WowReader.ReadFloat((uint)(player.BaseAddress + ObjectOffsets.Rot));
+            player.UnitFieldsAddress = WowReader.ReadUInt((uint)(player.BaseAddress + ObjectOffsets.UnitFields));
+            player.CurrentHealth = WowReader.ReadUInt((uint)(player.UnitFieldsAddress + UnitOffsets.Health));
+            player.CurrentEnergy = WowReader.ReadUInt((uint)(player.UnitFieldsAddress + UnitOffsets.Energy));
+            player.MaxHealth = WowReader.ReadUInt((uint)(player.UnitFieldsAddress + UnitOffsets.MaxHealth));
+            player.Level = WowReader.ReadUInt((uint)(player.UnitFieldsAddress + UnitOffsets.Level));
+            player.MaxEnergy = WowReader.ReadUInt((uint)(player.UnitFieldsAddress + UnitOffsets.MaxEnergy));
+            player.MapId = WowReader.ReadUInt((uint)ObjectOffsets.mapId);
+            player.Name = PlayerNameFromGuid(LocalPlayer.Guid);
+            player.Set(WowReader.ReadFloat((uint)(player.BaseAddress + ObjectOffsets.Pos_X)), WowReader.ReadFloat((uint)(player.BaseAddress + ObjectOffsets.Pos_Y)), WowReader.ReadFloat((uint)(player.BaseAddress + ObjectOffsets.Pos_Z)));
+            //player.majPosition();
+            if (player.CurrentHealth <= 0) { player.isDead = true; }
+
+            return player;
+        }
+
+        public Player ScanTarget()
+        {
+            Player target = new Player();
+
+            target.Guid = WowReader.ReadUInt64((uint)(ClientOffsets.LocalTargetGUID));
+
+            if (target.Guid != 0)
+            {
+                target.BaseAddress = GetObjectBaseByGuid(target.Guid);
+                /*target.XPos = WowReader.ReadFloat((uint)(LocalTarget.BaseAddress + ObjectOffsets.Pos_X));
+                target.YPos = WowReader.ReadFloat((uint)(LocalTarget.BaseAddress + ObjectOffsets.Pos_Y));
+                target.ZPos = WowReader.ReadFloat((uint)(LocalTarget.BaseAddress + ObjectOffsets.Pos_Z));*/
+                target.Type = (short)WowReader.ReadUInt((uint)(target.BaseAddress + ObjectOffsets.Type));
+                target.Rotation = WowReader.ReadFloat((uint)(target.BaseAddress + ObjectOffsets.Rot));
+                target.UnitFieldsAddress = WowReader.ReadUInt((uint)(target.BaseAddress + ObjectOffsets.UnitFields));
+                target.CurrentHealth = WowReader.ReadUInt((uint)(target.UnitFieldsAddress + UnitOffsets.Health));
+                target.CurrentEnergy = WowReader.ReadUInt((uint)(target.UnitFieldsAddress + UnitOffsets.Energy));
+                target.MaxHealth = WowReader.ReadUInt((uint)(target.UnitFieldsAddress + UnitOffsets.MaxHealth));
+                target.Level = WowReader.ReadUInt((uint)(target.UnitFieldsAddress + UnitOffsets.Level));
+                target.SummonedBy = WowReader.ReadUInt64((uint)(target.UnitFieldsAddress + UnitOffsets.SummonedBy));
+                target.MaxEnergy = WowReader.ReadUInt((uint)(target.UnitFieldsAddress + UnitOffsets.MaxEnergy));
+                target.Set(WowReader.ReadFloat((uint)(target.BaseAddress + ObjectOffsets.Pos_X)), WowReader.ReadFloat((uint)(target.BaseAddress + ObjectOffsets.Pos_Y)), WowReader.ReadFloat((uint)(target.BaseAddress + ObjectOffsets.Pos_Z)));
+
+                if (target.Type == 3) // not a human player
+                    target.Name = MobNameFromGuid(target.Guid);
+                if (target.Type == 4) // a human player
+                    target.Name = PlayerNameFromGuid(target.Guid);
+                if (target.CurrentHealth <= 0) { target.isDead = true; }
+
+                target.targeted = true;
+                
+                //we don't add LocalTarget to the ArrayList because he or she will appear again later
+            }
+
+            return target;
+        }
+
+        public ArrayList ScanListObject()
+        {
+            ArrayList ListObject = new ArrayList();
+            Player manyObject = new Player();
+
+            manyObject.BaseAddress = FirstObject;
+
+            while (manyObject.BaseAddress != 0 && manyObject.BaseAddress % 2 == 0)
+            {
+                manyObject.Type = (short)(WowReader.ReadUInt((uint)(manyObject.BaseAddress + ObjectOffsets.Type)));
+
+                if (manyObject.Type == 4)
+                {
+                    manyObject.UnitFieldsAddress = WowReader.ReadUInt((uint)(manyObject.BaseAddress + ObjectOffsets.UnitFields));
+                    manyObject.CurrentHealth = WowReader.ReadUInt((uint)(manyObject.UnitFieldsAddress + UnitOffsets.Health));
+                    //manyObject.CurrentEnergy = WowReader.ReadUInt((uint)(LocalPlayer.UnitFieldsAddress + UnitOffsets.Energy));
+                    manyObject.MaxHealth = WowReader.ReadUInt((uint)(manyObject.UnitFieldsAddress + UnitOffsets.MaxHealth));
+                    /*manyObject.XPos = WowReader.ReadFloat((uint)(manyObject.BaseAddress + ObjectOffsets.Pos_X));
+                    manyObject.YPos = WowReader.ReadFloat((uint)(manyObject.BaseAddress + ObjectOffsets.Pos_Y));
+                    manyObject.ZPos = WowReader.ReadFloat((uint)(manyObject.BaseAddress + ObjectOffsets.Pos_Z));*/
+                    manyObject.Rotation = WowReader.ReadFloat((uint)(manyObject.BaseAddress + ObjectOffsets.Rot));
+                    manyObject.Guid = WowReader.ReadUInt64((uint)(manyObject.BaseAddress + ObjectOffsets.Guid));
+                    manyObject.Level = WowReader.ReadUInt((uint)(manyObject.UnitFieldsAddress + UnitOffsets.Level));
+                    manyObject.MaxEnergy = WowReader.ReadUInt((uint)(manyObject.UnitFieldsAddress + UnitOffsets.MaxEnergy));
+                    manyObject.Name = PlayerNameFromGuid(manyObject.Guid);
+                    manyObject.Set(WowReader.ReadFloat((uint)(manyObject.BaseAddress + ObjectOffsets.Pos_X)), WowReader.ReadFloat((uint)(manyObject.BaseAddress + ObjectOffsets.Pos_Y)), WowReader.ReadFloat((uint)(manyObject.BaseAddress + ObjectOffsets.Pos_Z)));
+                    // check to see whether this player is dead or not
+                    if (manyObject.CurrentHealth <= 0)
+                    {
+                        manyObject.isDead = true;
+                    }
+
+                    manyObject.targeted = false;
+
+                    ListObject.Add((Player)manyObject.Clone());
+                }
+                if (manyObject.Type == 3)
+                {
+                    manyObject.UnitFieldsAddress = WowReader.ReadUInt((uint)(manyObject.BaseAddress + ObjectOffsets.UnitFields));
+                    manyObject.CurrentHealth = WowReader.ReadUInt((uint)(manyObject.UnitFieldsAddress + UnitOffsets.Health));
+                    //CurrentObject.CurrentEnergy = WowReader.ReadUInt((uint)(LocalPlayer.UnitFieldsAddress + UnitOffsets.Energy));
+                    manyObject.MaxHealth = WowReader.ReadUInt((uint)(manyObject.UnitFieldsAddress + UnitOffsets.MaxHealth));
+                    /*manyObject.XPos = WowReader.ReadFloat((uint)(manyObject.BaseAddress + ObjectOffsets.Pos_X));
+                    manyObject.YPos = WowReader.ReadFloat((uint)(manyObject.BaseAddress + ObjectOffsets.Pos_Y));
+                    manyObject.ZPos = WowReader.ReadFloat((uint)(manyObject.BaseAddress + ObjectOffsets.Pos_Z));*/
+                    manyObject.Rotation = WowReader.ReadFloat((uint)(manyObject.BaseAddress + ObjectOffsets.Rot));
+                    manyObject.Guid = WowReader.ReadUInt64((uint)(manyObject.BaseAddress + ObjectOffsets.Guid));
+                    manyObject.Level = WowReader.ReadUInt((uint)(manyObject.UnitFieldsAddress + UnitOffsets.Level));
+                    manyObject.MaxEnergy = WowReader.ReadUInt((uint)(manyObject.UnitFieldsAddress + UnitOffsets.MaxEnergy));
+                    manyObject.Name = MobNameFromGuid(manyObject.Guid);
+                    manyObject.Set(WowReader.ReadFloat((uint)(manyObject.BaseAddress + ObjectOffsets.Pos_X)), WowReader.ReadFloat((uint)(manyObject.BaseAddress + ObjectOffsets.Pos_Y)), WowReader.ReadFloat((uint)(manyObject.BaseAddress + ObjectOffsets.Pos_Z)));
+                    // check to see whether this player is dead or not
+                    if (manyObject.CurrentHealth <= 0)
+                    {
+                        manyObject.isDead = true;
+                    }
+
+                    manyObject.targeted = false;
+
+                    ListObject.Add((Player)manyObject.Clone());
+                }
+                // set the current object as the next object in the object manager
+                manyObject.BaseAddress = WowReader.ReadUInt((uint)(manyObject.BaseAddress + ClientOffsets.NextObjectOffset));
+            }
+
+            return ListObject;
+        }
+
+        /*public void ScanObject()
         {
             CurrentPlayers.Clear();
 
@@ -112,7 +242,7 @@ namespace TroisBot.Memory
             LocalPlayer.MaxEnergy = WowReader.ReadUInt((uint)(LocalPlayer.UnitFieldsAddress + UnitOffsets.MaxEnergy));
             LocalPlayer.MapId = WowReader.ReadUInt((uint)ObjectOffsets.mapId);
             LocalPlayer.Name = PlayerNameFromGuid(LocalPlayer.Guid);
-            LocalPlayer.majPosition();
+            //LocalPlayer.majPosition();
             if (LocalPlayer.CurrentHealth <= 0) { LocalPlayer.isDead = true; }
 
             LocalTarget.Guid = WowReader.ReadUInt64((uint)(ClientOffsets.LocalTargetGUID));
@@ -132,7 +262,7 @@ namespace TroisBot.Memory
                 LocalTarget.Level = WowReader.ReadUInt((uint)(LocalTarget.UnitFieldsAddress + UnitOffsets.Level));
                 LocalTarget.SummonedBy = WowReader.ReadUInt64((uint)(LocalTarget.UnitFieldsAddress + UnitOffsets.SummonedBy));
                 LocalTarget.MaxEnergy = WowReader.ReadUInt((uint)(LocalTarget.UnitFieldsAddress + UnitOffsets.MaxEnergy));
-                LocalTarget.majPosition();
+                //LocalTarget.majPosition();
 
                 if (LocalTarget.Type == 3) // not a human player
                     LocalTarget.Name = MobNameFromGuid(LocalTarget.Guid);
@@ -201,7 +331,7 @@ namespace TroisBot.Memory
                 // set the current object as the next object in the object manager
                 CurrentObject.BaseAddress = WowReader.ReadUInt((uint)(CurrentObject.BaseAddress + ClientOffsets.NextObjectOffset));
             }
-        }
+        }*/
 
         private string MobNameFromGuid(ulong Guid)
         {

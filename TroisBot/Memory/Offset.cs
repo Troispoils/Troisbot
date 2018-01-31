@@ -31,8 +31,8 @@ namespace TroisBot.Memory
         {
             mapId = 0x00AB63BC,
             Type = 0x14,
-            Pos_X = 0x79C,
-            Pos_Y = 0x798,
+            Pos_X = 0x798,
+            Pos_Y = 0x79C,
             Pos_Z = 0x7A0,
             Rot = 0x7A8,
             Guid = 0x30,

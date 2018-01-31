@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
 using TroisBot.Units;
+using TroisBot.Units.Definition;
 
 namespace TroisBot.Radar
 {
@@ -36,10 +37,10 @@ namespace TroisBot.Radar
             return (float)(Rotation * (180 / Math.PI));
         }
 
-        private void calculeMap(float playerX, float objectX, float playerY, float objectY)
+        private void calculeMap(Position player, Position target)
         {
-            pointX = ((playerX - objectX) * (float)2.5 + 260) / 2;
-            pointY = ((playerY - objectY) * (float)2.5 + 260) / 2;
+            pointY = ((player.X - target.X) * (float)2.5 + 260) / 2;
+            pointX = ((player.Y - target.Y) * (float)2.5 + 260) / 2;
         }
 
         public Bitmap TracePlayerInMap(Bitmap map, Player player, Player curent, Color color, bool affname = false)
@@ -49,7 +50,7 @@ namespace TroisBot.Radar
             g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
 
             float Rotation = RadianToDegree(curent.Rotation);
-            calculeMap(player.XPos, curent.XPos, player.YPos, curent.YPos);
+            calculeMap(player.GetPosition(), curent.GetPosition());
 
             g.ResetTransform();
             g.TranslateTransform(-pointX, -pointY, System.Drawing.Drawing2D.MatrixOrder.Append);
