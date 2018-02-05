@@ -65,5 +65,14 @@ namespace TroisBot.Memory
             CTM_Action = 0x1C,                          // 3.3.5a 12340
             CTM_GUID = 0x20,                            // 3.3.5a 12340
         }
+
+        public enum Corpse : uint
+        {
+
+            X = 0x00BD0A50,                              // 3.3.5
+            Y = X + 0x4,                                 // 3.3.5
+            Z = X + 0x8,                                 // 3.3.5
+
+        }
     }
 }

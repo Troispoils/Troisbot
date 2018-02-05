@@ -12,9 +12,12 @@ using DBCStoresCLI;
 using DetourCLI;
 using MapCLI;
 using TroisBot.Memory;
+using TroisBot.Move;
 using TroisBot.Properties;
 using TroisBot.Radar;
+using TroisBot.Simu;
 using TroisBot.Units;
+using TroisBot.Units.Definition;
 using VMapCLI;
 
 namespace TroisBot
@@ -29,6 +32,12 @@ namespace TroisBot
 
         ManageMem mem = new ManageMem();
         ManageGraph graph = new ManageGraph();
+        CTM move = new CTM();
+        MapCLI.Point point = new MapCLI.Point();
+
+        bool StartBot = false;
+        bool choixCible = false;
+        int rand = 0;
 
         public Form1()
         {
@@ -59,19 +68,39 @@ namespace TroisBot
             curTarget = mem.ScanTarget();
             curObject = mem.ScanListObject();
 
-            //mem.ScanObject();
-
             MajPlayerInfo(curPlayer);
             MajTargetInfo(curTarget);
 
             pictureBox_maps.Image = MajGraph();
 
-            /*label_name.Text = mem.GetNamePlayer();
-            label_level.Text = mem.GetLevelPlayer().ToString();
-            label_vie.Text = mem.GetLifePlayer();
-            label_energie.Text = mem.GetEnergyPlayer();*/
+            //toolStripStatusLabel1.Text = curObject.Count.ToString();
 
-            //pictureBox_maps.Image = mem.test(DrawArea);
+            if(StartBot)
+            {
+                if(choixCible == false)
+                {
+                    rand = new Random().Next(0, curObject.Count);
+                    Player locTarget = (Player)curObject[rand];
+                    move.majCTM(curPlayer, locTarget, mem.GetBlackMagic());
+                    move.StartThread();
+                    choixCible = true;
+                }
+                else
+                {
+                    if (move.ThreadAlive() == true)
+                    {
+                        choixCible = true;
+                        toolStripStatusLabel1.Text = "Thread alive";
+                    }
+                    else
+                    {
+                        choixCible = false;
+                        toolStripStatusLabel1.Text = "Thread dead";
+                        new KeySim().KeyDown((int)Keys.Tab);
+                        new KeySim().KeyUp((int)Keys.Tab);
+                    }
+                }
+            }
         }
 
         private void ClearBitmap(ref Bitmap img)
@@ -83,7 +112,10 @@ namespace TroisBot
 
         private void button_move_Click(object sender, EventArgs e)
         {
-            mem.testmoveAsync();
+            if (StartBot)
+                StartBot = false;
+            else
+                StartBot = true;
         }
 
         private void MajPlayerInfo(Player player)
@@ -109,7 +141,6 @@ namespace TroisBot
                 if (i.Type == 3)
                 {
                     graphForm = graph.TracePlayerInMap(DrawArea, curPlayer, i, Color.Red);
-                    toolStripStatusLabel1.Text = i.X.ToString();
                 }
                 else if (i.Type == 4)
                 {
@@ -118,12 +149,9 @@ namespace TroisBot
                     else
                         graphForm = graph.TracePlayerInMap(DrawArea, curPlayer, i, Color.Green);
                 }
-                //coco = graph.TracePlayerInMap(test, LocalPlayer, i);
-
-                //toolStripStatusLabel1.Text = i.Type.ToString();
             }
             if (curTarget.Guid != 0)
-                graphForm = graph.TracePlayerInMap(DrawArea, curPlayer, curTarget, Color.Yellow, true);
+                graphForm = graph.TracePlayerInMap(DrawArea, curPlayer, curTarget, Color.DarkKhaki, true);
             return graphForm;
         }
     }

@@ -16,7 +16,6 @@ namespace TroisBot.Units
         public float XPos = 0;
         public float YPos = 0;
         public float ZPos = 0;
-        public uint MapId = 0;
         public float Rotation = 0;
         public uint BaseAddress = 0;
         public uint UnitFieldsAddress = 0;
@@ -42,7 +41,7 @@ namespace TroisBot.Units
 
         }
 
-        public Player(ulong cGuid, ulong cSummonedBy, float cXPos, float cYPos, float cZPos, float cRotation, uint cBaseAddress, uint cUnitFieldsAddress, short cType, String cName, uint cCurrentHealth, uint cMaxHealth, uint cCurrentEnergy, uint cMaxEnergy, uint cLevel, bool cisDead, uint cMapId)
+        public Player(ulong cGuid, ulong cSummonedBy, float cXPos, float cYPos, float cZPos, float cRotation, uint cBaseAddress, uint cUnitFieldsAddress, short cType, String cName, uint cCurrentHealth, uint cMaxHealth, uint cCurrentEnergy, uint cMaxEnergy, uint cLevel, bool cisDead, int cMapId, float cX, float cY, float cZ)
         {
             Guid = cGuid;
             SummonedBy = cSummonedBy;
@@ -59,14 +58,18 @@ namespace TroisBot.Units
             CurrentEnergy = cCurrentEnergy;
             MaxEnergy = cMaxEnergy;
             Level = cLevel;
-            MapId = cMapId;
+            MapID = cMapId;
 
             isDead = cisDead;
+
+            X = cX;
+            Y = cY;
+            Z = cZ;
         }
 
         public object Clone()
         {
-            return new Player(Guid, SummonedBy, XPos, YPos, ZPos, Rotation, BaseAddress, UnitFieldsAddress, Type, Name, CurrentHealth, MaxHealth, CurrentEnergy, MaxEnergy, Level, isDead, MapId);
+            return new Player(Guid, SummonedBy, XPos, YPos, ZPos, Rotation, BaseAddress, UnitFieldsAddress, Type, Name, CurrentHealth, MaxHealth, CurrentEnergy, MaxEnergy, Level, isDead, MapID, X, Y, Z);
         }
     }
 }

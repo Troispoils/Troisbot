@@ -77,8 +77,8 @@ namespace TroisBot.Units.Definition
 
         public static Position operator -(Position a, Position b)
         {
-            /*if (a.MapID != INVALID_MAP_ID && b.MapID != INVALID_MAP_ID && a.MapID != b.MapID)
-                return new Position();*/
+            if (a.MapID != INVALID_MAP_ID && b.MapID != INVALID_MAP_ID && a.MapID != b.MapID)
+                return new Position();
 
             var result = new Position(a.X - b.X, a.Y - b.Y, a.Z - b.Z, 0.0f, a.MapID);
             result.O = result.CalculateOrientation();

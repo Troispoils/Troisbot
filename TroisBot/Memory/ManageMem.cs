@@ -109,7 +109,7 @@ namespace TroisBot.Memory
             player.MaxHealth = WowReader.ReadUInt((uint)(player.UnitFieldsAddress + UnitOffsets.MaxHealth));
             player.Level = WowReader.ReadUInt((uint)(player.UnitFieldsAddress + UnitOffsets.Level));
             player.MaxEnergy = WowReader.ReadUInt((uint)(player.UnitFieldsAddress + UnitOffsets.MaxEnergy));
-            player.MapId = WowReader.ReadUInt((uint)ObjectOffsets.mapId);
+            player.MapID = (int)WowReader.ReadUInt((uint)ObjectOffsets.mapId);
             player.Name = PlayerNameFromGuid(LocalPlayer.Guid);
             player.Set(WowReader.ReadFloat((uint)(player.BaseAddress + ObjectOffsets.Pos_X)), WowReader.ReadFloat((uint)(player.BaseAddress + ObjectOffsets.Pos_Y)), WowReader.ReadFloat((uint)(player.BaseAddress + ObjectOffsets.Pos_Z)));
             //player.majPosition();
@@ -172,15 +172,16 @@ namespace TroisBot.Memory
                     manyObject.CurrentHealth = WowReader.ReadUInt((uint)(manyObject.UnitFieldsAddress + UnitOffsets.Health));
                     //manyObject.CurrentEnergy = WowReader.ReadUInt((uint)(LocalPlayer.UnitFieldsAddress + UnitOffsets.Energy));
                     manyObject.MaxHealth = WowReader.ReadUInt((uint)(manyObject.UnitFieldsAddress + UnitOffsets.MaxHealth));
-                    /*manyObject.XPos = WowReader.ReadFloat((uint)(manyObject.BaseAddress + ObjectOffsets.Pos_X));
-                    manyObject.YPos = WowReader.ReadFloat((uint)(manyObject.BaseAddress + ObjectOffsets.Pos_Y));
-                    manyObject.ZPos = WowReader.ReadFloat((uint)(manyObject.BaseAddress + ObjectOffsets.Pos_Z));*/
+                    manyObject.X = WowReader.ReadFloat((uint)(manyObject.BaseAddress + ObjectOffsets.Pos_X));
+                    manyObject.Y = WowReader.ReadFloat((uint)(manyObject.BaseAddress + ObjectOffsets.Pos_Y));
+                    manyObject.Z = WowReader.ReadFloat((uint)(manyObject.BaseAddress + ObjectOffsets.Pos_Z));
                     manyObject.Rotation = WowReader.ReadFloat((uint)(manyObject.BaseAddress + ObjectOffsets.Rot));
                     manyObject.Guid = WowReader.ReadUInt64((uint)(manyObject.BaseAddress + ObjectOffsets.Guid));
                     manyObject.Level = WowReader.ReadUInt((uint)(manyObject.UnitFieldsAddress + UnitOffsets.Level));
                     manyObject.MaxEnergy = WowReader.ReadUInt((uint)(manyObject.UnitFieldsAddress + UnitOffsets.MaxEnergy));
+                    manyObject.MapID = (int)WowReader.ReadUInt((uint)ObjectOffsets.mapId);
                     manyObject.Name = PlayerNameFromGuid(manyObject.Guid);
-                    manyObject.Set(WowReader.ReadFloat((uint)(manyObject.BaseAddress + ObjectOffsets.Pos_X)), WowReader.ReadFloat((uint)(manyObject.BaseAddress + ObjectOffsets.Pos_Y)), WowReader.ReadFloat((uint)(manyObject.BaseAddress + ObjectOffsets.Pos_Z)));
+                    //manyObject.Set(WowReader.ReadFloat((uint)(manyObject.BaseAddress + ObjectOffsets.Pos_X)), WowReader.ReadFloat((uint)(manyObject.BaseAddress + ObjectOffsets.Pos_Y)), WowReader.ReadFloat((uint)(manyObject.BaseAddress + ObjectOffsets.Pos_Z)));
                     // check to see whether this player is dead or not
                     if (manyObject.CurrentHealth <= 0)
                     {
@@ -197,15 +198,16 @@ namespace TroisBot.Memory
                     manyObject.CurrentHealth = WowReader.ReadUInt((uint)(manyObject.UnitFieldsAddress + UnitOffsets.Health));
                     //CurrentObject.CurrentEnergy = WowReader.ReadUInt((uint)(LocalPlayer.UnitFieldsAddress + UnitOffsets.Energy));
                     manyObject.MaxHealth = WowReader.ReadUInt((uint)(manyObject.UnitFieldsAddress + UnitOffsets.MaxHealth));
-                    /*manyObject.XPos = WowReader.ReadFloat((uint)(manyObject.BaseAddress + ObjectOffsets.Pos_X));
-                    manyObject.YPos = WowReader.ReadFloat((uint)(manyObject.BaseAddress + ObjectOffsets.Pos_Y));
-                    manyObject.ZPos = WowReader.ReadFloat((uint)(manyObject.BaseAddress + ObjectOffsets.Pos_Z));*/
+                    manyObject.X = WowReader.ReadFloat((uint)(manyObject.BaseAddress + ObjectOffsets.Pos_X));
+                    manyObject.Y = WowReader.ReadFloat((uint)(manyObject.BaseAddress + ObjectOffsets.Pos_Y));
+                    manyObject.Z = WowReader.ReadFloat((uint)(manyObject.BaseAddress + ObjectOffsets.Pos_Z));
                     manyObject.Rotation = WowReader.ReadFloat((uint)(manyObject.BaseAddress + ObjectOffsets.Rot));
                     manyObject.Guid = WowReader.ReadUInt64((uint)(manyObject.BaseAddress + ObjectOffsets.Guid));
                     manyObject.Level = WowReader.ReadUInt((uint)(manyObject.UnitFieldsAddress + UnitOffsets.Level));
                     manyObject.MaxEnergy = WowReader.ReadUInt((uint)(manyObject.UnitFieldsAddress + UnitOffsets.MaxEnergy));
+                    manyObject.MapID = (int)WowReader.ReadUInt((uint)ObjectOffsets.mapId);
                     manyObject.Name = MobNameFromGuid(manyObject.Guid);
-                    manyObject.Set(WowReader.ReadFloat((uint)(manyObject.BaseAddress + ObjectOffsets.Pos_X)), WowReader.ReadFloat((uint)(manyObject.BaseAddress + ObjectOffsets.Pos_Y)), WowReader.ReadFloat((uint)(manyObject.BaseAddress + ObjectOffsets.Pos_Z)));
+                    //manyObject.Set(WowReader.ReadFloat((uint)(manyObject.BaseAddress + ObjectOffsets.Pos_X)), WowReader.ReadFloat((uint)(manyObject.BaseAddress + ObjectOffsets.Pos_Y)), WowReader.ReadFloat((uint)(manyObject.BaseAddress + ObjectOffsets.Pos_Z)));
                     // check to see whether this player is dead or not
                     if (manyObject.CurrentHealth <= 0)
                     {
@@ -402,9 +404,14 @@ namespace TroisBot.Memory
             return CurrentPlayers;
         }
 
-        public string GetNamePlayer()
+        public BlackMagic GetBlackMagic()
         {
-            return LocalPlayer.Name;
+            return WowReader;
+        }
+
+        public uint GetConnect()
+        {
+            return ObjectManager;
         }
         public uint GetLevelPlayer()
         {
